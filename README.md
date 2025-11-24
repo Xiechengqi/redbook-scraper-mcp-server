@@ -107,12 +107,6 @@ Content-Type: application/json
 - `MCP_STREAM_HOST`：默认 `0.0.0.0`
 - `MCP_STREAM_PORT`：默认 `3333`
 
-示例命令：
-
-```bash
-RUN_MODE=mcp MCP_TRANSPORT=stream-http MCP_STREAM_HOST=0.0.0.0 MCP_STREAM_PORT=3333 python3 main.py
-```
-
 这样即可让 Cursor Agent 等客户端通过 Streamable HTTP 连接当前 MCP 服务。
 
 ### cursor-agent + mcp
