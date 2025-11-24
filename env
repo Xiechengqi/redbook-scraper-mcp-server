@@ -1,0 +1,11 @@
+# Usage: cp -f -v env .env && ln -f .env scripts/.env
+
+## Agent CLI
+## curl -SsL https://raw.githubusercontent.com/Xiechengqi/scripts/refs/heads/master/install/Agent/agent -o /usr/local/bin/agent && chmod +x /usr/local/bin/agent
+export OPENAI_API_BASEURL="https://api.deepseek.com/v1"
+export OPENAI_MODEL="deepseek-chat"
+export OPENAI_API_KEY="sk-..."
+
+## Cursor CLI
+## curl -SsL https://cursor.com/install | bash
+export CURSOR_API_KEY=
