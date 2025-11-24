@@ -156,8 +156,7 @@ def process_url(url: str) -> str:
 
     return processed_url
 
-@mcp.tool()
-async def login() -> str:
+async def login_action() -> str:
     """登录小红书账号
     
     Returns:
@@ -209,6 +208,11 @@ async def login() -> str:
     else:
         browser_manager.is_logged_in = True
         return "已登录小红书账号"
+
+@mcp.tool(name="login")
+async def login() -> str:
+    """MCP工具封装，复用登录逻辑"""
+    return await login_action()
 
 @mcp.tool()
 async def search_notes(keywords: str, limit: int = 30) -> List[Dict[str, str]]:
@@ -513,7 +517,7 @@ async def main():
     """主函数 - 用于测试"""
     try:
         logger.info("正在登陆小红书 ...")
-        login_result = await login()
+        login_result = await login_action()
         logger.info(f"登陆状态: {login_result}")
 
         url = "https://www.xiaohongshu.com/explore/683571670000000022024de3?xsec_token=AB36cgps5_rWEZ5HyjkL-9V4hR0tD163A9eqp47_nK738=&xsec_source=pc_search"
@@ -554,7 +558,7 @@ async def health_check():
 async def api_login():
     """登录小红书账号"""
     try:
-        result = await login()
+        result = await login_action()
         return LoginResponse(
             success=True,
             message=result
