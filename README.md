@@ -10,58 +10,26 @@
 - 🌐 **FastAPI接口**: 提供RESTful API接口
 - 🔧 **MCP工具**: 支持MCP协议的工具调用
 
-## 安装依赖
+## 安装
 
 ```bash
-pip install -r requirements.txt
+bash run.sh
 ```
 
-## 使用方法
+## Web Terminal
 
-### 1. 同时运行FastAPI和MCP服务器（推荐）
+- http://localhost:12222
 
-默认模式，同时运行两个服务器：
+## Chromium
 
-```bash
-python3 main.py
-```
+- http://localhost:17900
 
-或者：
-
-```bash
-RUN_MODE=both python3 main.py
-```
-
-这将启动两个独立的进程：
-- FastAPI服务器运行在 http://localhost:10001
-- MCP服务器通过stdio通信
-
-### 2. 只运行FastAPI服务器
-
-```bash
-RUN_MODE=api python3 main.py
-```
-
-或者使用uvicorn直接运行：
-
-```bash
-uvicorn main:app --host 0.0.0.0 --port 10001
-```
-
-### 3. 只运行MCP服务器
-
-```bash
-RUN_MODE=mcp python3 main.py
-```
-
-### 4. 访问API文档
+## FastAPI
 
 启动FastAPI服务器后，访问以下地址查看API文档：
 
-- Swagger UI: http://localhost:10001/docs
-- ReDoc: http://localhost:10001/redoc
-
-## API端点
+- Swagger UI: http://localhost:18000/docs
+- ReDoc: http://localhost:18000/redoc
 
 ### 健康检查
 
@@ -123,7 +91,7 @@ Content-Type: application/json
 }
 ```
 
-## MCP工具
+## MCP
 
 项目提供了以下MCP工具：
 
@@ -131,15 +99,9 @@ Content-Type: application/json
 2. **search_notes(keywords, limit)** - 搜索笔记
 3. **get_note_content(url)** - 获取笔记内容
 
-## 环境要求
-
-- Python 3.8+
-- Chrome浏览器（需要运行在9222端口的CDP模式）
-- Playwright
-
 ## 注意事项
 
-1. 某些功能需要浏览器环境，确保Chrome以CDP模式运行
+1. 确保 docker 预先安装
 2. 首次使用需要登录小红书账号
 
 ## 免责声明
