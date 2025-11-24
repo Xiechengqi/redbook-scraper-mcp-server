@@ -27,18 +27,6 @@ try:
 except ValueError:
     MCP_STREAM_PORT = 3333
 
-
-def build_mcp_run_kwargs() -> Dict[str, Any]:
-    """构建MCP运行参数，方便根据不同transport配置。"""
-    run_kwargs: Dict[str, Any] = {"transport": MCP_TRANSPORT}
-    if MCP_TRANSPORT == "stream-http":
-        run_kwargs.update(
-            host=MCP_STREAM_HOST,
-            port=MCP_STREAM_PORT,
-        )
-    return run_kwargs
-
-
 mcp = FastMCP("xiaohongshu_scraper")
 
 # 创建FastAPI应用
@@ -634,14 +622,9 @@ if __name__ == "__main__":
 
     def run_mcp_server_process():
         """在独立进程中运行MCP服务器"""
-        logger.info(
-            "启动MCP服务器进程 (transport=%s, host=%s, port=%s)...",
-            MCP_TRANSPORT,
-            MCP_STREAM_HOST,
-            MCP_STREAM_PORT,
-        )
+        logger.info(f"启动MCP服务器进程 (transport={MCP_TRANSPORT}, host={MCP_STREAM_HOST}, port={MCP_STREAM_PORT})...")
         try:
-            mcp.run(**build_mcp_run_kwargs())
+            mcp.run(transport=MCP_TRANSPORT, host=MCP_STREAM_HOST, port=MCP_STREAM_PORT)
         except Exception as e:
             logger.error(f"MCP服务器运行出错: {e}")
     
