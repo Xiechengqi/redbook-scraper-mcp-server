@@ -103,7 +103,7 @@ Content-Type: application/json
 
 默认情况下，MCP 服务使用 Streamable HTTP 方式对外暴露，可以通过以下环境变量自定义：
 
-- `MCP_TRANSPORT`：默认 `stream-http`，如需兼容旧版可改为 `stdio`
+- `MCP_TRANSPORT`：默认 `http`，其他可选项 `stdio`
 - `MCP_STREAM_HOST`：默认 `0.0.0.0`
 - `MCP_STREAM_PORT`：默认 `3333`
 
