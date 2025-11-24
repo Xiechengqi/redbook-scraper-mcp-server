@@ -20,7 +20,7 @@ logger.add(
     format="<g>{time:YYYY-MM-DD HH:mm:ss}</g> | {level} | {message}",
 )
 
-MCP_TRANSPORT = os.getenv("MCP_TRANSPORT", "stream-http")
+MCP_TRANSPORT = os.getenv("MCP_TRANSPORT", "http")
 MCP_STREAM_HOST = os.getenv("MCP_STREAM_HOST", "0.0.0.0")
 try:
     MCP_STREAM_PORT = int(os.getenv("MCP_STREAM_PORT", "3333"))
