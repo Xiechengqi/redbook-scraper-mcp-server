@@ -22,6 +22,7 @@ docker run -itd \
   -p 12222:2222 \
   -p 17900:7900 \
   -p 18000:8000 \
+  -p 18080:8080 \
   -v ${PWD}/user-data:/app/chromium/user-data \
   -v ${PWD}/supervisor_redbook.conf:/app/supervisor/conf.d/redbook.conf \
   -v ${PWD}/supervisor_redbook.sh:/app/supervisor/start.d/redbook.sh \

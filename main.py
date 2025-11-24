@@ -22,10 +22,7 @@ logger.add(
 
 MCP_TRANSPORT = os.getenv("MCP_TRANSPORT", "http")
 MCP_STREAM_HOST = os.getenv("MCP_STREAM_HOST", "0.0.0.0")
-try:
-    MCP_STREAM_PORT = int(os.getenv("MCP_STREAM_PORT", "3333"))
-except ValueError:
-    MCP_STREAM_PORT = 3333
+MCP_STREAM_PORT = int(os.getenv("MCP_STREAM_PORT", "8080"))
 
 mcp = FastMCP("xiaohongshu_scraper")
 
