@@ -3,6 +3,7 @@ import time
 import asyncio
 import json
 import sys
+import os
 from urllib.parse import quote
 from loguru import logger
 from playwright.async_api import async_playwright
@@ -18,6 +19,25 @@ logger.add(
     colorize=True,
     format="<g>{time:YYYY-MM-DD HH:mm:ss}</g> | {level} | {message}",
 )
+
+MCP_TRANSPORT = os.getenv("MCP_TRANSPORT", "stream-http")
+MCP_STREAM_HOST = os.getenv("MCP_STREAM_HOST", "0.0.0.0")
+try:
+    MCP_STREAM_PORT = int(os.getenv("MCP_STREAM_PORT", "3333"))
+except ValueError:
+    MCP_STREAM_PORT = 3333
+
+
+def build_mcp_run_kwargs() -> Dict[str, Any]:
+    """构建MCP运行参数，方便根据不同transport配置。"""
+    run_kwargs: Dict[str, Any] = {"transport": MCP_TRANSPORT}
+    if MCP_TRANSPORT == "stream-http":
+        run_kwargs.update(
+            host=MCP_STREAM_HOST,
+            port=MCP_STREAM_PORT,
+        )
+    return run_kwargs
+
 
 mcp = FastMCP("xiaohongshu_scraper")
 
@@ -603,11 +623,8 @@ async def api_get_note_content(request: NoteContentRequest):
         raise HTTPException(status_code=500, detail=f"获取笔记内容失败: {str(e)}")
 
 if __name__ == "__main__":
-    import os
     import multiprocessing
     import signal
-    import sys
-    from typing import Optional
 
     run_mode = os.getenv("RUN_MODE", "both")
 
@@ -617,9 +634,14 @@ if __name__ == "__main__":
 
     def run_mcp_server_process():
         """在独立进程中运行MCP服务器"""
-        logger.info("启动MCP服务器进程...")
+        logger.info(
+            "启动MCP服务器进程 (transport=%s, host=%s, port=%s)...",
+            MCP_TRANSPORT,
+            MCP_STREAM_HOST,
+            MCP_STREAM_PORT,
+        )
         try:
-            mcp.run(transport="stdio")
+            mcp.run(**build_mcp_run_kwargs())
         except Exception as e:
             logger.error(f"MCP服务器运行出错: {e}")
     

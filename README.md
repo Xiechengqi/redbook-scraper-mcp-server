@@ -99,6 +99,22 @@ Content-Type: application/json
 2. **search_notes(keywords, limit)** - 搜索笔记
 3. **get_note_content(url)** - 获取笔记内容
 
+### Streamable HTTP 启动
+
+默认情况下，MCP 服务使用 Streamable HTTP 方式对外暴露，可以通过以下环境变量自定义：
+
+- `MCP_TRANSPORT`：默认 `stream-http`，如需兼容旧版可改为 `stdio`
+- `MCP_STREAM_HOST`：默认 `0.0.0.0`
+- `MCP_STREAM_PORT`：默认 `3333`
+
+示例命令：
+
+```bash
+RUN_MODE=mcp MCP_TRANSPORT=stream-http MCP_STREAM_HOST=0.0.0.0 MCP_STREAM_PORT=3333 python3 main.py
+```
+
+这样即可让 Cursor Agent 等客户端通过 Streamable HTTP 连接当前 MCP 服务。
+
 ## 注意事项
 
 1. 确保 docker 预先安装
