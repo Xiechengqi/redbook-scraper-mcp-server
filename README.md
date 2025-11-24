@@ -115,6 +115,14 @@ RUN_MODE=mcp MCP_TRANSPORT=stream-http MCP_STREAM_HOST=0.0.0.0 MCP_STREAM_PORT=3
 
 这样即可让 Cursor Agent 等客户端通过 Streamable HTTP 连接当前 MCP 服务。
 
+### cursor-agent + mcp
+
+<img width="2832" height="914" alt="image" src="https://github.com/user-attachments/assets/37ead07b-88a8-4141-9ac2-779cba296605" />
+
+<img width="2846" height="874" alt="image" src="https://github.com/user-attachments/assets/8bf09fb4-9195-47b8-ae76-7e6f92bd4c01" />
+
+
+
 ## 注意事项
 
 1. 确保 docker 预先安装
